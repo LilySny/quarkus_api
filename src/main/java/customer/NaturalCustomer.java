@@ -2,16 +2,14 @@ package customer;
 
 import contact.Contact;
 import document.Document;
+import groups.model.Group;
 import order.Order;
 import person.NaturalPerson;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.List;
 
 public class NaturalCustomer implements NaturalPerson, Customer {
-
-    public NaturalCustomer() {
-    }
 
     public String getName() {
         // TODO implement here
@@ -44,6 +42,21 @@ public class NaturalCustomer implements NaturalPerson, Customer {
     }
 
     @Override
+    public void setId(int id) {
+
+    }
+
+    @Override
+    public int getId() {
+        return 1;
+    }
+
+    @Override
+    public void setUsername(String username) {
+
+    }
+
+    @Override
     public String getUsername() {
         return null;
     }
@@ -52,4 +65,11 @@ public class NaturalCustomer implements NaturalPerson, Customer {
     public String getPassword() {
         return null;
     }
+
+    @Override
+    public List<Group> getGroups() {
+        return null;
+    }
+
+
 }

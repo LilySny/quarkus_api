@@ -1,4 +1,4 @@
-package user.model;
+package response;
 
 import io.quarkus.runtime.annotations.RegisterForReflection;
 

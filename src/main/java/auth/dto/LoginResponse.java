@@ -1,26 +1,15 @@
 package auth.dto;
 
 import io.quarkus.runtime.annotations.RegisterForReflection;
-import user.model.User;
 
 @RegisterForReflection
 public class LoginResponse {
-    private User user;
     private String token;
     private String message;
 
-    public LoginResponse(User user, String token, String message) {
-        this.user = user;
+    public LoginResponse(String token, String message) {
         this.token = token;
         this.message = message;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public String getToken() {

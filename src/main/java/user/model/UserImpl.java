@@ -1,18 +1,23 @@
 package user.model;
 
+import groups.model.Group;
 import io.quarkus.runtime.annotations.RegisterForReflection;
 
+import java.util.List;
+import java.util.Objects;
+
 @RegisterForReflection
-public class UserImpl implements User {
-    private String id;
+public class UserImpl implements User{
+    private int id;
     private String username;
     private String password;
+    private List<Group> groups;
 
     public UserImpl(){}
 
-    public UserImpl(String username, String password) {
-        this.username = username;
-        this.password = password;
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, username, password, groups);
     }
 
     public void setUsername(String username) {
@@ -23,21 +28,40 @@ public class UserImpl implements User {
         this.password = password;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    @Override
+
     public String getUsername() {
         return this.username;
     }
 
-    @Override
     public String getPassword() {
         return this.password;
+    }
+
+    @Override
+    public List<Group> getGroups() {
+        return this.groups;
+    }
+
+    public void setGroups(List<Group> groups) {
+        this.groups = groups;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserImpl user = (UserImpl) o;
+        return id == user.id &&
+                username.equals(user.username) &&
+                password.equals(user.password) &&
+                Objects.equals(groups, user.groups);
     }
 }

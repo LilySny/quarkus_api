@@ -12,11 +12,11 @@ public interface UserService {
 
     User findUserByEmail(String email);
 
-    User findUserById(String id);
+    User findUserById(int id);
 
-    String save(CreateUserDto createUserDto);
+    int save(CreateUserDto createUserDto);
 
     void update(UserDto userDto);
 
-    void delete(String id);
+    void delete(int id);
 }

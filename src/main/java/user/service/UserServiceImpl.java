@@ -7,18 +7,15 @@ import user.dto.UserDto;
 import user.model.User;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.transaction.Transactional;
 import java.util.List;
 
 @ApplicationScoped
 public class UserServiceImpl implements UserService {
 
-    public UserServiceImpl(UserDao userDao){
-        this.userDao = userDao;
-    }
+    public UserServiceImpl(UserDao userDao){ this.userDao = userDao; }
 
-    @Inject
-    private UserDao userDao;
+     @Inject
+     private UserDao userDao;
 
     @Override
     public List<User> findAll() {
@@ -27,34 +24,59 @@ public class UserServiceImpl implements UserService {
         try {
             return userDao.findAll();
         } catch (RuntimeException e){
-            throw new RuntimeException(e.getMessage());
+            throw new RuntimeException("userServiceImpl problem");
         }
     }
 
     @Override
     public User findUserByEmail(String email) {
 
-        return userDao.findUserByUsername(email);
+        try {
+            return userDao.findUserByUsername(email);
+        } catch (RuntimeException e){
+            throw new RuntimeException(e.getMessage());
+        }
     }
 
     @Override
-    public User findUserById(String id) {
-        return userDao.findUserById(id);
+    public User findUserById(int id) {
+
+        try {
+            return userDao.findUserById(id);
+        } catch (RuntimeException e){
+            throw new RuntimeException(e.getMessage());
+        }
+
     }
 
-    @Transactional
     @Override
-    public String save(CreateUserDto createUserDto) {
-        return userDao.save(createUserDto);
+    public int save(CreateUserDto createUserDto) {
+
+        try {
+            return userDao.save(createUserDto);
+        } catch (RuntimeException e){
+            throw new RuntimeException(e.getMessage());
+        }
+
     }
 
     @Override
     public void update(UserDto userDto) {
-        userDao.update(userDto);
+
+        try {
+            userDao.update(userDto);
+        } catch (RuntimeException e){
+            throw new RuntimeException(e.getMessage());
+        }
     }
 
     @Override
-    public void delete(String id) {
-        userDao.delete(id);
+    public void delete(int id) {
+        try {
+            userDao.delete(id);
+        } catch (RuntimeException e){
+            throw new RuntimeException(e.getMessage());
+        }
+
     }
 }

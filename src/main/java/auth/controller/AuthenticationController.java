@@ -2,9 +2,8 @@ package auth.controller;
 
 import auth.dto.LoginDto;
 import auth.dto.LoginResponse;
-import auth.service.LoginService;
+import auth.service.AuthenticationFacade;
 import com.google.inject.Inject;
-import exceptions.InvalidLoginException;
 
 import javax.annotation.security.PermitAll;
 import javax.ws.rs.Consumes;
@@ -17,22 +16,25 @@ import javax.ws.rs.core.Response;
 @Path("/api/v1/auth")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class LoginController {
+public class AuthenticationController {
 
-    public LoginController(LoginService loginService){
+    public AuthenticationController(AuthenticationFacade loginService){
         this.loginService = loginService;
     }
 
     @Inject
-    LoginService loginService;
+    private AuthenticationFacade loginService;
 
     @POST
     @PermitAll
-    public Response login(LoginDto userDto) throws InvalidLoginException {
+    //@RolesAllowed({"CUSTOMER", "ADMIN"})
+    public Response login(LoginDto userDto) {
         LoginResponse response = loginService.login(userDto);
         return Response.accepted()
                 .entity(response)
                 .build();
-
     }
+
+
+
 }
